@@ -12,7 +12,6 @@ class AppInterceptor extends Interceptor {
   static const String invalidTokenResponse =
       'Failed to validate your account credentials. Please login again';
 
-
   @override
   void onError(
     final DioException err,
@@ -67,6 +66,33 @@ class AppInterceptor extends Interceptor {
 
       super.onError(err, handler);
     }
+  }
+
+  @override
+  void onResponse(
+      final Response response, final ResponseInterceptorHandler handler) {
+    print(response.data['msgID']);
+    if (response.data['msgID'] == 1) {
+      return handler.next(response);
+    } else {
+      return handler.reject(DioException(
+          type: DioExceptionType.badResponse,
+          error: {
+            'errors': [
+              '${response.data['msgName']}',
+              '${response.data['msgDescription']}'
+            ]
+          },
+          message: 'Has Error',
+          requestOptions: response.requestOptions,
+          response: Response(data: {
+            'errors': [
+              '${response.data['msgName']}',
+            ]
+          }, requestOptions: response.requestOptions)));
+    }
+
+    super.onResponse(response, handler);
   }
 
   @override

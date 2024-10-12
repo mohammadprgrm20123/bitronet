@@ -164,6 +164,9 @@ class AppHttpClient {
   ) {
     final List<String> errorList = [];
 
+
+
+
     if (dioError.type == DioExceptionType.connectionError ||
         DioExceptionType.connectionTimeout == dioError.type) {
       errorList.add('خطا در اتصال ...');
@@ -174,7 +177,7 @@ class AppHttpClient {
             final newMap = dioError.response?.data['errors'];
 
             if (newMap is List) {
-              for (final element in newMap[0] as List) {
+              for (final element in newMap) {
                 errorList.add(element);
               }
             }
@@ -211,6 +214,9 @@ class AppHttpClient {
 
     final errorModel = FailureModel(
         errors: errorList, statusCode: dioError.response?.statusCode);
+
+
+    debugPrint(errorModel.errors.toString());
 
     return Left(errorModel);
   }

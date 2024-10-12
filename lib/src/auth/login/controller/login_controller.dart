@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import '../../../../infrastructure/routing/app_route_name.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../share/model/api_status.dart';
 import '../model/login_dto.dart';
@@ -37,7 +38,8 @@ class LoginController extends GetxController {
         Utils.showErrorToast(errors: l.errors);
         showLoading.value = false;
       }, (final response) async {
-        Utils.saveToken(token: response.token);
+        Utils.saveToken(token: response);
+        Get.toNamed(AppRouteName.homeRoute);
       });
     } catch (e) {
       showLoading.value = false;

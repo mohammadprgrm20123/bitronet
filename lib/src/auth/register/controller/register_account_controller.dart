@@ -3,18 +3,19 @@ import 'package:get/get.dart';
 
 import '../../../../../infrastructure/routing/app_route_name.dart';
 import '../../../../../infrastructure/utils/utils.dart';
-import '../../main/model/register_model.dart';
-import '../../main/respository/register_main_repository.dart';
+import '../../../share/widget/loading.dart';
+import '../model/register_model.dart';
+import '../respository/register_main_repository.dart';
 
-class LegalAccountController extends GetxController {
+class RegisterAccountController extends GetxController {
   final MainRegisterRepository _repository = MainRegisterRepository();
 
   RxBool showLoading = false.obs;
   RxBool showPassword = false.obs;
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController familyController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   RxBool checkRule = false.obs;
 
@@ -22,19 +23,23 @@ class LegalAccountController extends GetxController {
   void dispose() {
     super.dispose();
     phoneController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    nameController.dispose();
+    familyController.dispose();
   }
 
   Future<void> register({required final RegisterDto dto}) async {
     showLoading.value = true;
+    WaitingDialog().show();
     final result = await _repository.register(dto: dto);
 
     result.fold((final error) => Utils.showErrorToast(errors: error.errors),
         (final response) {
-      Get.toNamed(AppRouteName.verifyRoute, parameters: {'email': dto.email});
+      Get.toNamed(
+        AppRouteName.verifyRoute(phone: dto.mobile),
+      );
     });
     showLoading.value = false;
+
+    WaitingDialog().hide();
   }
 }

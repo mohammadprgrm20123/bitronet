@@ -6,7 +6,7 @@ ApiEndPoint {
   static const String verifyCode = '/$version/auth/validate/token';
   static const String resendVerifyCode = '/$version/auth/token/resend';
   static const String forgetPassword = '/$version/auth/password/forget';
-  static const String register = '/$version/auth/register';
+  static const String register = '/general/register';
   static const String getAllOrders = '/$version/orders';
   static const String getCashIncomes = '/$version/casheincomes/cash-services-list';
   static const String createOrder = '/$version/orders/create';

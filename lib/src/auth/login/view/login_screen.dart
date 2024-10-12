@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../../../infrastructure/routing/app_route_name.dart';
-import '../../../../infrastructure/theme/app_color.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../../infrastructure/utils/validation_utils.dart';
 import '../../../share/widget/app_button.dart';
@@ -40,7 +39,7 @@ class LoginScreen extends GetView<LoginController> {
                       const LogoWithImage(),
                       Utils.largeGap,
                       phone(context),
-                      Utils.mediumGap,
+                      Utils.smallGap,
                       password(context),
                       Utils.mediumGap,
                       const Spacer(),
@@ -118,6 +117,7 @@ class LoginScreen extends GetView<LoginController> {
 
   Widget phone(final BuildContext context) => ColumnDataTitle(
         title: 'شماره موبایل',
+        isRequired: true,
         textForm: TextFormField(
           controller: controller.emailController,
           autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -1,8 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../infrastructure/theme/app_color.dart';
 import 'svg_icon.dart';
+import 'package:shimmer/shimmer.dart';
 
 class LogoWithImage extends StatelessWidget {
   const LogoWithImage({super.key});
@@ -13,9 +15,13 @@ class LogoWithImage extends StatelessWidget {
       const Spacer(),
       FadeInDownBig(
         key: UniqueKey(),
-        child: Image.asset(
-          'assets/images/bitronet.png',
-          width: 150,
+        child: Shimmer.fromColors(
+          baseColor: AppColor.primary,
+          highlightColor: Colors.grey,
+          child: Image.asset(
+            'assets/images/bitronet.png',
+            width: 150,
+          ),
         ),
       ),
       const Spacer(),
