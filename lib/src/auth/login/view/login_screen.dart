@@ -39,8 +39,6 @@ class LoginScreen extends GetView<LoginController> {
                       const LogoWithImage(),
                       Utils.largeGap,
                       phone(context),
-                      Utils.smallGap,
-                      password(context),
                       Utils.mediumGap,
                       const Spacer(),
                       Utils.mediumGap,
@@ -49,13 +47,10 @@ class LoginScreen extends GetView<LoginController> {
                             showLoading: controller.showLoading.value,
                             onPressed: () {
                               if (controller.formKey.currentState!.validate()) {
-                                controller.login(
+                                controller.sendLoginCode(
                                     context: context,
-                                    dto: LoginDto(
-                                        phone: controller.emailController.text,
-                                        password: Utils.replaceFarsiNumber(
-                                            controller
-                                                .passwordController.text)));
+                                    mobile: Utils.replaceFarsiNumber(
+                                        controller.mobileController.text));
                               }
                             },
                             text: 'ورود به حساب',
@@ -119,7 +114,7 @@ class LoginScreen extends GetView<LoginController> {
         title: 'شماره موبایل',
         isRequired: true,
         textForm: TextFormField(
-          controller: controller.emailController,
+          controller: controller.mobileController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (final value) =>
               FormValidationUtils(validators: [

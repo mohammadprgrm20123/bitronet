@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
             },
           ),
           routeInformationParser: GetInformationParser(
-            initialRoute: AppRouteName.loginRoute,
+            initialRoute: AppRouteName.splashRoute,
           ),
           getPages: AppPages.appPages,
         ),

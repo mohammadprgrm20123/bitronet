@@ -33,10 +33,15 @@ class RegisterAccountController extends GetxController {
     final result = await _repository.register(dto: dto);
 
     result.fold((final error) => Utils.showErrorToast(errors: error.errors),
+
         (final response) {
+
+      Utils.showSuccessToast(message: 'با موفقیت ثبت نام شدید وارد اکانت کاربری خود شوید ');
       Get.toNamed(
-        AppRouteName.verifyRoute(phone: dto.mobile),
+        AppRouteName.loginRoute,
       );
+
+
     });
     showLoading.value = false;
 

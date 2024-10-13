@@ -12,7 +12,7 @@ import '../repository/login_repository.dart';
 
 class LoginController extends GetxController {
   final LoginRepository _repository = LoginRepository();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   Rx<ApiStatus<void>> loginApi = const ApiStatus.idle().obs;
@@ -22,30 +22,28 @@ class LoginController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
+    mobileController.dispose();
     passwordController.dispose();
   }
 
   RxBool showLoading = false.obs;
 
-  Future<void> login(
-      {required final LoginDto dto,
-      required final BuildContext context}) async {
+
+  Future<void> sendLoginCode(
+      {required final String mobile,
+        required final BuildContext context}) async {
     WaitingDialog().show();
-    try {
-      final result = await _repository.login(dto: dto);
+      final result = await _repository.sendLoginCode(mobile: mobile);
       await result.fold((final l) {
         Utils.showErrorToast(errors: l.errors);
         showLoading.value = false;
       }, (final response) async {
-        Utils.saveToken(token: response);
-        Get.toNamed(AppRouteName.homeRoute);
+        Get.offAllNamed(AppRouteName.verifyRoute(phone: mobile));
       });
-    } catch (e) {
-      showLoading.value = false;
-    }
+
 
     showLoading.value = false;
     WaitingDialog().hide();
   }
+
 }

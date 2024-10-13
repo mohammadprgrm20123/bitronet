@@ -45,11 +45,11 @@ class AppTheme {
             return Colors.grey;
           }),
         ),
-        inputDecorationTheme: const InputDecorationTheme(isDense: true)),
-    dialogBackgroundColor: AppColor.secondary2,
+        inputDecorationTheme: const InputDecorationTheme()),
+    dialogBackgroundColor: AppColor.white,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: AppColor.secondary2,
+      backgroundColor: AppColor.white,
       iconColor: Colors.white,
     ),
     appBarTheme: const AppBarTheme(
@@ -64,7 +64,7 @@ class AppTheme {
             color: Colors.white),
         centerTitle: true),
     inputDecorationTheme: InputDecorationTheme(
-        isDense: true,
+        // isDense: true,
         // hintStyle: const TextStyle(color: Colors.black54),
         // counterStyle: const TextStyle(color: AppColor.grey),
         // helperStyle: const TextStyle(color: AppColor.grey),

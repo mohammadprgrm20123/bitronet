@@ -104,7 +104,6 @@ class AppInterceptor extends Interceptor {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'pop-scope-q': true,
-      'x-scope': 'avalpardakht-web-application',
       'Authorization': 'Bearer ${AppParameters.token}',
       'X-Requested-With': 'XMLHttpRequest',
     };

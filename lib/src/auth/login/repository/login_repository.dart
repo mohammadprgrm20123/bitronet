@@ -9,11 +9,13 @@ import '../model/login_dto.dart';
 class LoginRepository {
   final AppHttpClient _appHttpClient = AppHttpClient();
 
-  Future<Either<FailureModel, String>> login(
-      {required final LoginDto dto}) async {
-    final result =
-        await _appHttpClient.post(ApiEndPoint.loginApi, data: dto.toJson());
 
-    return result.fold(Left.new, (final r) => Right(r.data['msgData']));
+  Future<Either<FailureModel, String>> sendLoginCode(
+      {required final String mobile}) async {
+    final result = await _appHttpClient
+        .post(ApiEndPoint.sendLoginCode, data: {'Mobile': mobile});
+
+    return result.fold(Left.new, (final r) => Right(r.data['msgName']));
   }
+
 }

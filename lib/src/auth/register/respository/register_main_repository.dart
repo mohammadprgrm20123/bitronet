@@ -11,7 +11,7 @@ class MainRegisterRepository {
   Future<Either<FailureModel, void>> register(
       {required final RegisterDto dto}) async {
     final result =
-        await _appHttpClient.post(ApiEndPoint.register, data: dto.toJson());
+        await _appHttpClient.post(ApiEndPoint.registerApi, data: dto.toJson());
 
     return result.fold(
         Left.new, (final r) => const Right(null));

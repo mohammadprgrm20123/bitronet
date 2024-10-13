@@ -9,6 +9,7 @@ import '../../src/share/model/auth_status.dart';
 import '../../src/share/model/user_details_model.dart';
 import '../../src/share/model/verification_type.dart';
 import '../../src/share/widget/app_text.dart';
+import '../routing/app_route_name.dart';
 import '../theme/app_color.dart';
 import 'app_parameters.dart';
 import 'key_parameters.dart';
@@ -123,6 +124,12 @@ class Utils {
     final box = GetSecureStorage();
     box.write(KeyParameters.tokenKey, token);
     AppParameters.token = token;
+  }
+
+  static void exitFromAccount() {
+    final box = GetSecureStorage();
+    box.remove(KeyParameters.tokenKey);
+    Get.offAllNamed(AppRouteName.loginRoute);
   }
 
   static String removeDecimalZeroFormat(final double n) =>

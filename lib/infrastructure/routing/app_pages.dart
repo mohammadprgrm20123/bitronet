@@ -4,6 +4,8 @@ import '../../src/auth/login/binding/login_binding.dart';
 import '../../src/auth/login/view/login_screen.dart';
 import '../../src/auth/register/binding/register_binding.dart';
 import '../../src/auth/register/view/main_register_screen.dart';
+import '../../src/auth/splash/binding/splash_binding.dart';
+import '../../src/auth/splash/view/splash_screen.dart';
 import '../../src/auth/verify/binding/verify_binding.dart';
 import '../../src/auth/verify/view/verify_screen.dart';
 import '../../src/home/view/home_screen.dart';
@@ -28,7 +30,11 @@ class AppPages {
       page: () => const MainRegisterScreen(),
     ),
 
-
+    GetPage(
+      name: AppRouteName.splashRoute,
+      bindings: [SplashBindings()],
+      page: () => const SplashScreen(),
+    ),
 
     GetPage(
       name: AppRouteName.homeRoute,

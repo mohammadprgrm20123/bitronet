@@ -13,15 +13,12 @@ class LogoWithImage extends StatelessWidget {
   Widget build(final BuildContext context) => Row(
     children: [
       const Spacer(),
-      FadeInDownBig(
-        key: UniqueKey(),
-        child: Shimmer.fromColors(
-          baseColor: AppColor.primary,
-          highlightColor: Colors.grey,
-          child: Image.asset(
-            'assets/images/bitronet.png',
-            width: 150,
-          ),
+      Shimmer.fromColors(
+        baseColor: AppColor.primary,
+        highlightColor: Colors.grey,
+        child: Image.asset(
+          'assets/images/bitronet.png',
+          width: 150,
         ),
       ),
       const Spacer(),
