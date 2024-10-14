@@ -5,8 +5,11 @@ class AppRouteName {
   static String loginRoute = '/login';
   static String verify = '/verify/:phone';
   static String homeRoute = '/home';
+  static String workPLaceBoss = '/wokplace_boss';
 
 //------------------------------------------------------------------------------
   static String verifyRoute({required final String phone}) =>
       verify.replaceAll(':phone', phone);
+
+  static String workPLaceBossRoute = '$homeRoute$workPLaceBoss';
 }

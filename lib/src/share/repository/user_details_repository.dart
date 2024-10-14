@@ -8,7 +8,7 @@ mixin UserDetailsRepository {
   final AppHttpClient _appHttpClient = AppHttpClient();
 
   Future<Either<FailureModel, void>> getUserDetails() async {
-    final result = await _appHttpClient.get(ApiEndPoint.getUseDetails);
+    final result = await _appHttpClient.post(ApiEndPoint.getUseDetails);
 
     return result.fold(Left.new, (final r) => const Right(null));
   }
