@@ -23,4 +23,6 @@ class HomeController extends GetxController {
 
     result.fold((final e) {}, (final r) {});
   }
+
+
 }

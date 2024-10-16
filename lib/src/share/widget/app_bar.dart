@@ -3,7 +3,7 @@ import '../../../infrastructure/theme/app_color.dart';
 import 'app_text.dart';
 
 AppBar buildAppBar(
-        {required final String title, final List<Widget>? actions}) =>
+        {required final String title, final List<Widget>? actions,final Widget? leading}) =>
     AppBar(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -14,6 +14,7 @@ AppBar buildAppBar(
         style: const TextStyle(
             color: AppColor.white, fontSize: 18, fontWeight: FontWeight.w400),
       ),
+      leading: leading,
       centerTitle: true,
       backgroundColor: AppColor.primary,
     );

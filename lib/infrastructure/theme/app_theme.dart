@@ -312,7 +312,6 @@ class AppTheme {
     ),
     cardTheme: const CardTheme(
       margin: EdgeInsets.zero,
-      color: _surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(

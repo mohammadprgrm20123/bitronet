@@ -10,6 +10,8 @@ ApiEndPoint {
   static const String getUseDetails = '/general/Profile';
 
 
+  static const String activationWorkPlace = '/Boss/WorkplaceActive';
+  static const String removeWorkPlace = '/Boss/WorkplaceRemove';
 
 
 }

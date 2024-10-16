@@ -6,8 +6,7 @@ import 'package:get_secure_storage/get_secure_storage.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../src/share/model/auth_status.dart';
-import '../../src/share/model/user_details_model.dart';
-import '../../src/share/model/verification_type.dart';
+
 import '../../src/share/widget/app_text.dart';
 import '../routing/app_route_name.dart';
 import '../theme/app_color.dart';
@@ -148,60 +147,6 @@ class Utils {
   }
 
 
-
-
-  static bool isNotAuthenticationCompleted(final UserDetailsModel? user) {
-    bool isAuthenticate = false;
-    if (user?.data.user?.needVideoVerification != 0) {
-      final List<AuthStatus> status =
-          user?.data.verifications.map((final e) => e.resultStatus).toList() ??
-              [];
-      isAuthenticate = status.any((final e) => e != AuthStatus.confirmed);
-      print(isAuthenticate);
-    } else {
-      final List<VerificationModel> list =
-          user?.data.verifications.toList() ?? [];
-      list.removeWhere(
-          (final e) => e.verificationType == VerificationType.video);
-
-      final List<AuthStatus> status =
-          list.map((final e) => e.resultStatus).toList();
-      isAuthenticate = status.any((final e) => e != AuthStatus.confirmed);
-    }
-
-    return isAuthenticate;
-  }
-
-  static double calculateProgressingAuthentication(
-      {final UserDetailsModel? model}) {
-    if (model == null) {
-      return 0;
-    }
-    int allVerificationTypes = model.data.verificationTypes?.keys
-            .map((final e) => e)
-            .toList()
-            .length ??
-        0;
-
-    final confirmationVerification = model.data.verifications
-        .where((final e) => e.resultStatus == AuthStatus.confirmed)
-        .toList();
-
-    if (model.data.user?.needVideoVerification == 0) {
-      if (confirmationVerification
-              .firstWhereOrNull(
-                  (final e) => e.verificationType == VerificationType.video)
-              ?.resultStatus !=
-          AuthStatus.confirmed) {
-        allVerificationTypes--;
-      }
-    }
-
-    if (model.data.user?.isBusiness == false) {
-      allVerificationTypes--;
-    }
-    return confirmationVerification.length / allVerificationTypes;
-  }
 
   static void removeBiometric({required final String key}) async {
     final box = GetSecureStorage();

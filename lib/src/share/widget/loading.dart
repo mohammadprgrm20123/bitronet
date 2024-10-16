@@ -71,8 +71,8 @@ class _LoadingState extends State<Loading> {
                   LoadingWidget(),
                   Utils.largeGap,
                   AppText(
-                    'صبر کنید...',
-                    style: TextStyle(color: Colors.white),
+                    'لطفا صبر کنید...',
+                    style: TextStyle(color: Colors.white,fontSize: 10),
                   ),
                 ]),
               ),
