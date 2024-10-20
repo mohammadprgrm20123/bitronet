@@ -1,3 +1,4 @@
+import '../../../../infrastructure/routing/app_route_name.dart';
 import '../../../share/widget/delete_dialog.dart';
 import '../models/work_place_model.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,18 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
           Icons.add,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () async {
+          final result = await Get.toNamed(AppRouteName.addWorkPlaceRoute);
+
+          if (result != null && result is bool) {
+            if (result == true) {
+              controller.showActive.value = true;
+              controller.showActive.refresh();
+              await controller.getAllWorkPLaces(
+                  isActive: controller.showActive.value);
+            }
+          }
+        },
       ),
       appBar: buildAppBar(title: 'لیست کارگاه ها'),
       body: Column(
@@ -52,8 +64,8 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                     totalSwitches: 2,
                     animate: true,
                     customTextStyles: [
-                      TextStyle(fontSize: 14),
-                      TextStyle(fontSize: 14)
+                      const TextStyle(fontSize: 14),
+                      const TextStyle(fontSize: 14)
                     ],
                     labels: const ['کارگاه غیر فعال', 'کارگاه  فعال'],
                     onToggle: (final index) {
@@ -97,38 +109,62 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         child: Card(
           elevation: 3,
+          semanticContainer: true,
+          surfaceTintColor: Colors.grey.withOpacity(.5),
+          borderOnForeground: true,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Utils.smallGap,
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.location_city_outlined),
-                        Utils.smallGap,
-                        const AppText('نام شرکت : '),
-                        AppText(
-                          e.name ?? '',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                  DecoratedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: AppText(
+                          e.active! ? 'فعال   ' : '  غیر فعال',
+                          style: TextStyle(
+                              color:
+                                  e.active! ? AppColor.success : AppColor.error,
+                              fontSize: 15),
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                      decoration: BoxDecoration(
+                        color: e.active!
+                            ? AppColor.success.withOpacity(.3)
+                            : AppColor.error.withOpacity(.3),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            bottomLeft: Radius.circular(4)),
+                      )),
                   const Spacer(),
                   PopupMenuButton<int>(
-                    onSelected: (final value) {
+                    onSelected: (final value) async {
                       if (value == 0) {
                         showDialog(
                             context: context,
-                            builder: (c) => DeleteDialog(onDelete: () {
+                            builder: (final c) => DeleteDialog(onDelete: () {
                                   Get.backLegacy();
                                   controller.deleteWorkPlace(id: e.id);
                                 }));
                       }
                       if (value == 2) {
                         controller.activationWorkPLace(id: e.id);
+                      }
+
+                      if (value == 1) {
+                        final result  = await  Get.toNamed(AppRouteName.editWorkPlaceRoute,
+                            arguments: e);
+
+
+                        if (result != null && result is bool) {
+                          if (result == true) {
+                            await controller.getAllWorkPLaces(
+                                isActive: controller.showActive.value);
+                          }
+                        }
                       }
                     },
                     itemBuilder: (final context) => [
@@ -146,7 +182,7 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                           ],
                         ),
                       ),
-                      PopupMenuItem<int>(
+                      const PopupMenuItem<int>(
                         value: 1,
                         child: Row(
                           children: [
@@ -179,10 +215,29 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 4),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.location_city_outlined),
+                        Utils.smallGap,
+                        const AppText('نام شرکت : '),
+                        AppText(
+                          e.name ?? '',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                 child: Row(
                   children: [
                     const Icon(Icons.share_location),
@@ -207,23 +262,7 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
   Widget qrCode(final BuildContext context, final WorkPlaceModel e) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          DecoratedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: AppText(
-                  e.active! ? 'فعال' : 'غیر فعال',
-                  style: TextStyle(
-                      color: e.active! ? AppColor.success : AppColor.error,fontSize: 15),
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: e.active!
-                    ? AppColor.success.withOpacity(.1)
-                    : AppColor.error.withOpacity(.1),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(4),
-                    bottomLeft: Radius.circular(4)),
-              )),
+          const Spacer(),
           InkWell(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -251,12 +290,13 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(16),
                                           topLeft: Radius.circular(16)),
-                                      color: AppColor.success),
+                                      color: AppColor.primary),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: AppText.bodyLarge(
-                                      e.name ?? '',
-                                      style: const TextStyle(fontSize: 20),
+                                      ' نام شرکت/کارگاه :${e.name}' ?? '',
+                                      style: const TextStyle(
+                                          fontSize: 15, color: Colors.white),
                                       textAlign: TextAlign.center,
                                     ),
                                   )),
@@ -270,6 +310,8 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                                   ),
                                   Utils.mediumGap,
                                   AppText(e.shareKey.toString()),
+                                  Utils.mediumGap,
+                                  Utils.mediumGap,
                                 ],
                               )
                             ],
@@ -278,7 +320,6 @@ class WorkPlaceListBossScreen extends GetView<WorkPlaceListBossController> {
                       ));
             },
           ),
-
         ],
       );
 }

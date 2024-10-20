@@ -21,7 +21,6 @@ class ColumnDataTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-
             children: [
               AppText(
                 title,

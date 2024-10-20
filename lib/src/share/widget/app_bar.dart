@@ -5,9 +5,6 @@ import 'app_text.dart';
 AppBar buildAppBar(
         {required final String title, final List<Widget>? actions,final Widget? leading}) =>
     AppBar(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(6), bottomRight: Radius.circular(6))),
       actions: actions,
       title: AppText(
         title,

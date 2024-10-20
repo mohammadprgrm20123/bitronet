@@ -12,6 +12,7 @@ ApiEndPoint {
 
   static const String activationWorkPlace = '/Boss/WorkplaceActive';
   static const String removeWorkPlace = '/Boss/WorkplaceRemove';
+  static const String modifyWorkPlace = '/Boss/WorkplaceSave';
 
 
 }

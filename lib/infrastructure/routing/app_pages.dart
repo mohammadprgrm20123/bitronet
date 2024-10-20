@@ -9,7 +9,10 @@ import '../../src/auth/splash/view/splash_screen.dart';
 import '../../src/auth/verify/binding/verify_binding.dart';
 import '../../src/auth/verify/view/verify_screen.dart';
 import '../../src/home/view/home_screen.dart';
+import '../../src/work_place_boss/list/models/work_place_model.dart';
 import '../../src/work_place_boss/list/view/work_place_list_boss_screen.dart';
+import '../../src/work_place_boss/modify/view/modify_work_place_screen.dart';
+import '../../src/work_place_boss/modify/view/select_address.dart';
 import 'app_route_name.dart';
 
 class AppPages {
@@ -51,9 +54,41 @@ class AppPages {
           page: () => const WorkPlaceListBossScreen(),
         ),
         GetPage(
-          name: '/sddssds',
-          page: () => const WorkPlaceListBossScreen(),
+          name: AppRouteName.addWorkPlaceBoss,
+          page: () => const ModifyWorkPlaceScreen(),
+
+          children:[
+            GetPage(
+              name: AppRouteName.selectAddress,
+              page: () => const SelectedAddressScreen(),
+            ),
+          ]
         ),
+
+        GetPage(
+            name: AppRouteName.addWorkPlaceBoss,
+            page: () => const ModifyWorkPlaceScreen(),
+
+            children:[
+              GetPage(
+                name: AppRouteName.selectAddress,
+                page: () => const SelectedAddressScreen(),
+              ),
+            ]
+        ),
+
+        GetPage(
+            name: AppRouteName.editWorkPlaceBoss,
+            page: () => ModifyWorkPlaceScreen(model: Get.arguments as WorkPlaceModel,),
+
+            children:[
+              GetPage(
+                name: AppRouteName.selectAddress,
+                page: () => const SelectedAddressScreen(),
+              ),
+            ]
+        ),
+
       ]
     ),
 

@@ -1,24 +1,43 @@
 class AddWorkPlaceDto {
-  int iD;
-  String fName;
-  String lName;
-  String email;
-  String photo;
+  String? name;
+  bool? fixedPlace;
+  Place? place;
+  num? coverRadius;
 
   AddWorkPlaceDto(
-      {required this.iD,
-      required this.fName,
-      required this.lName,
-      required this.email,
-      required this.photo});
+      { this.name, this.fixedPlace, this.place, this.coverRadius});
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['ID'] = iD;
-    data['FName'] = fName;
-    data['LName'] = lName;
-    data['Email'] = email;
-    data['Photo'] = photo;
+    data['ID'] = 0;
+    data['Name'] = name;
+    data['FixedPlace'] = fixedPlace;
+    if (place != null) {
+      data['Place'] = place!.toJson();
+    }
+    data['CoverRadius'] = coverRadius;
+    return data;
+  }
+}
+
+
+
+class Place {
+  double? lat;
+  double? lon;
+
+  Place({this.lat, this.lon});
+
+  Place.fromJson(final Map<String, dynamic> json) {
+    lat = json['Lat'];
+    lon = json['Lon'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Lat'] = lat;
+    data['Lon'] = lon;
     return data;
   }
 }
