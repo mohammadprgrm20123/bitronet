@@ -12,7 +12,7 @@ class AppColor {
   static const Color tritry  = Color(0xFFE59A18);
   static const Color error  = Color(0xFFC52B2B) ;
   static const Color success  = Color(0xff5ed39f) ;
-  static const Color textColor  = Color(0x00ffffff) ;
+  static const Color textColor  = Color(0xffffffff) ;
   static const Color white  = Color(0xffffffff);
 
 }

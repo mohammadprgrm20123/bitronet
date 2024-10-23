@@ -9,6 +9,7 @@ import '../../src/auth/splash/view/splash_screen.dart';
 import '../../src/auth/verify/binding/verify_binding.dart';
 import '../../src/auth/verify/view/verify_screen.dart';
 import '../../src/home/view/home_screen.dart';
+import '../../src/work_place_boss/employee_shift_requests/main/view/main_tab_boss_screen.dart';
 import '../../src/work_place_boss/list/models/work_place_model.dart';
 import '../../src/work_place_boss/list/view/work_place_list_boss_screen.dart';
 import '../../src/work_place_boss/modify/view/modify_work_place_screen.dart';
@@ -50,44 +51,52 @@ class AppPages {
       page: () => const HomeScreen(),
       children: [
         GetPage(
-          name: AppRouteName.workPLaceBoss,
+          name: AppRouteName.workPlaceBoss,
           page: () => const WorkPlaceListBossScreen(),
-        ),
-        GetPage(
-          name: AppRouteName.addWorkPlaceBoss,
-          page: () => const ModifyWorkPlaceScreen(),
-
-          children:[
+          children: [
             GetPage(
-              name: AppRouteName.selectAddress,
-              page: () => const SelectedAddressScreen(),
+              name: AppRouteName.mainTabBoss,
+              page: () => MainTabBossScreen(workPlaceName: Get.parameters['title']??''),
+            ),
+
+            GetPage(
+                name: AppRouteName.addWorkPlaceBoss,
+                page: () => const ModifyWorkPlaceScreen(),
+
+                children:[
+                  GetPage(
+                    name: AppRouteName.selectAddress,
+                    page: () => const SelectedAddressScreen(),
+                  ),
+                ]
+            ),
+
+            GetPage(
+                name: AppRouteName.addWorkPlaceBoss,
+                page: () => const ModifyWorkPlaceScreen(),
+
+                children:[
+                  GetPage(
+                    name: AppRouteName.selectAddress,
+                    page: () => const SelectedAddressScreen(),
+                  ),
+                ]
+            ),
+
+            GetPage(
+                name: AppRouteName.editWorkPlaceBoss,
+                page: () => ModifyWorkPlaceScreen(model: Get.arguments,),
+
+                children:[
+                  GetPage(
+                    name: AppRouteName.selectAddress,
+                    page: () => const SelectedAddressScreen(),
+                  ),
+                ]
             ),
           ]
         ),
 
-        GetPage(
-            name: AppRouteName.addWorkPlaceBoss,
-            page: () => const ModifyWorkPlaceScreen(),
-
-            children:[
-              GetPage(
-                name: AppRouteName.selectAddress,
-                page: () => const SelectedAddressScreen(),
-              ),
-            ]
-        ),
-
-        GetPage(
-            name: AppRouteName.editWorkPlaceBoss,
-            page: () => ModifyWorkPlaceScreen(model: Get.arguments as WorkPlaceModel,),
-
-            children:[
-              GetPage(
-                name: AppRouteName.selectAddress,
-                page: () => const SelectedAddressScreen(),
-              ),
-            ]
-        ),
 
       ]
     ),

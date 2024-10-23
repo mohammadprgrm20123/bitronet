@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../infrastructure/theme/app_color.dart';
 import 'app_text.dart';
 
 class RowBuilder extends StatelessWidget {
@@ -8,8 +9,10 @@ class RowBuilder extends StatelessWidget {
   final int titleFlex;
   final int valueFlex;
   final TextStyle? valueStyle;
+  final Widget? icon;
 
   const RowBuilder({
+    this.icon,
     required this.title,
     required this.value,
     this.valueWidget,
@@ -24,6 +27,10 @@ class RowBuilder extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 4.0),
         child: Row(
           children: [
+            if(icon!=null)Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: icon!,
+            ),
             Expanded(
                 flex: titleFlex,
                 child: AppText.bodyMedium(
@@ -31,7 +38,7 @@ class RowBuilder extends StatelessWidget {
                   style: style(context).copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: Colors.white),
+                      color: AppColor.primary),
                 )),
             Expanded(
               flex: valueFlex,
@@ -44,7 +51,7 @@ class RowBuilder extends StatelessWidget {
                         style(context).copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
-                            color: Colors.white),
+                            color: AppColor.primary),
                   ),
             )
           ],
@@ -52,5 +59,5 @@ class RowBuilder extends StatelessWidget {
       );
 
   TextStyle style(final BuildContext context) =>
-      Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
+      Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColor.primary);
 }

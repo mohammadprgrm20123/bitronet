@@ -5,18 +5,28 @@ class AppRouteName {
   static String loginRoute = '/login';
   static String verify = '/verify/:phone';
   static String homeRoute = '/home';
-  static String workPLaceBoss = '/wokplace_boss';
+  static String workPlaceBoss = '/wokplace_boss';
   static String addWorkPlaceBoss = '/add_wokplace_boss';
   static String editWorkPlaceBoss = '/edit_wokplace_boss';
   static String selectAddress = '/selectAddress';
+  static String mainTabBoss = '/main_tab_boss/:title/:id';
 
 //------------------------------------------------------------------------------
   static String verifyRoute({required final String phone}) =>
       verify.replaceAll(':phone', phone);
 
-  static String workPLaceBossRoute = '$homeRoute$workPLaceBoss';
-  static String addWorkPlaceRoute = '$homeRoute$addWorkPlaceBoss';
-  static String editWorkPlaceRoute = '$homeRoute$editWorkPlaceBoss';
-  static String editSelectAddressRoute = '$homeRoute$editWorkPlaceRoute$selectAddress';
-  static String selectAddressRoute = '$homeRoute$addWorkPlaceBoss$selectAddress';
+  static String workPLaceBossRoute = '$homeRoute$workPlaceBoss';
+  static String addWorkPlaceRoute = '$homeRoute$workPlaceBoss$addWorkPlaceBoss';
+  static String editWorkPlaceRoute =
+      '$homeRoute$workPlaceBoss$editWorkPlaceBoss';
+  static String editSelectAddressRoute =
+      '$homeRoute$workPlaceBoss$editWorkPlaceBoss$selectAddress';
+  static String selectAddressRoute =
+      '$homeRoute$workPlaceBoss$addWorkPlaceBoss$selectAddress';
+
+  static String mainTabBossRoute(
+          {required final String title, required final String id}) =>
+      '$homeRoute$workPlaceBoss$mainTabBoss'
+          .replaceAll(':title', title)
+          .replaceAll(':id', id);
 }

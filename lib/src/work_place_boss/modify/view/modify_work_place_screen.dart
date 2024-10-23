@@ -31,10 +31,10 @@ class ModifyWorkPlaceScreen extends GetView<ModifyWorkPlaceController> {
 
     if (model != null) {
       controller.companyNameController.text = model!.name ?? '';
-      controller.fixLocation.value = !model!.fixedPlace!;
+      controller.fixLocation.value = model!.fixedPlace!;
       controller.corners.value = model!.coverRadius!.toDouble();
 
-      if (!model!.fixedPlace!) {
+      if (model!.fixedPlace!) {
         controller.latLng = LatLng(
             model!.place!.lat!.toDouble(), model!.place!.lon!.toDouble());
         controller.locationController.text = controller.latLng.toString();
@@ -67,7 +67,7 @@ class ModifyWorkPlaceScreen extends GetView<ModifyWorkPlaceController> {
                   contentPadding: EdgeInsets.zero,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   controlAffinity: ListTileControlAffinity.leading,
-                  title: const AppText('کارگاه محل ثابت ندارد (ماموریت و...)'),
+                  title: const AppText('کارگاه محل ثابت دارد '),
                   tristate: true,
                   value: controller.fixLocation.value,
                   onChanged: (final v) {
@@ -141,7 +141,7 @@ class ModifyWorkPlaceScreen extends GetView<ModifyWorkPlaceController> {
                       controller.editWorkPlace(EditWorkPlaceDto(
                           name: controller.companyNameController.text,
                           coverRadius: controller.corners.value.toInt(),
-                          fixedPlace: !controller.fixLocation.value,
+                          fixedPlace: controller.fixLocation.value,
                           place: controller.fixLocation.value
                               ? place.Place(
                                   lat: controller.latLng!.latitude,
@@ -153,7 +153,7 @@ class ModifyWorkPlaceScreen extends GetView<ModifyWorkPlaceController> {
                       controller.addWorkPlace(AddWorkPlaceDto(
                           name: controller.companyNameController.text,
                           coverRadius: controller.corners.value.toInt(),
-                          fixedPlace: !controller.fixLocation.value,
+                          fixedPlace: controller.fixLocation.value,
                           place: controller.fixLocation.value
                               ? place.Place(
                                   lat: controller.latLng!.latitude,

@@ -98,6 +98,7 @@ class Utils {
     Get.snackbar('', '',
         borderRadius: 4,
         borderWidth: 1,
+        duration: Duration(milliseconds: 1500),
         shouldIconPulse: false,
         barBlur: 50,
         titleText: AppText.bodySmall(

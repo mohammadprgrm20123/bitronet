@@ -13,17 +13,17 @@ class WorkPlaceListRepository  with WorkPlaceRepository{
 
 
   Future<Either<FailureModel, void>> activationWorkPlace(
-      final int id) async {
+      final int id,bool isActive) async {
     final result = await _appHttpClient
-        .post('${ApiEndPoint.activationWorkPlace}?id=$id');
+        .post('${ApiEndPoint.activationWorkPlace}?id=$id&active=$isActive');
 
     return result.fold(Left.new, (final r) => const Right(null));
   }
 
   Future<Either<FailureModel, void>> removeWorkPlace(
-      final int id) async {
+      final int id , ) async {
     final result = await _appHttpClient
-        .post('${ApiEndPoint.removeWorkPlace}?id=$id');
+        .post('${ApiEndPoint.removeWorkPlace}?id=${id}');
 
     return result.fold(Left.new, (final r) => const Right(null));
   }

@@ -38,7 +38,7 @@ class RegisterAccountController extends GetxController {
 
       Utils.showSuccessToast(message: 'با موفقیت ثبت نام شدید وارد اکانت کاربری خود شوید ');
       Get.toNamed(
-        AppRouteName.loginRoute,
+        AppRouteName.verifyRoute(phone: dto.mobile),
       );
 
 

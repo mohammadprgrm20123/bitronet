@@ -44,10 +44,10 @@ class WorkPlaceListBossController extends GetxController {
     WaitingDialog().hide();
   }
 
-  Future<void> activationWorkPLace({required final int id}) async {
+  Future<void> activationWorkPLace({required final int id,required bool isActive}) async {
     WaitingDialog().show();
 
-    final result = await _repository.activationWorkPlace(id);
+    final result = await _repository.activationWorkPlace(id,isActive);
 
     result.fold(
         (final e) => Utils.showErrorToast(errors: e.errors), (final v) {
