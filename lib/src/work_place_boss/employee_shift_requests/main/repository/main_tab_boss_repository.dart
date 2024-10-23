@@ -23,4 +23,12 @@ class MainTabBossRepository {
       return Right(models);
     });
   }
+
+  Future<Either<FailureModel, void>> deleteShift(
+      {required final String id}) async {
+    final result =
+    await _appHttpClient.post('${ApiEndPoint.deleteShift}?id=$id');
+
+    return result.fold(Left.new, (final r) => const Right(null));
+  }
 }

@@ -40,7 +40,7 @@ class AppTheme {
               return Colors.grey;
             }
             if (states.contains(WidgetState.selected)) {
-              return AppColor.secondary2;
+              return Colors.white;
             }
             return Colors.grey;
           }),
@@ -99,7 +99,7 @@ class AppTheme {
         onTertiary: AppColor.secondary2,
         seedColor: AppColor.primary),
     timePickerTheme: const TimePickerThemeData(
-      backgroundColor: AppColor.secondary2,
+      backgroundColor: Colors.white,
     ),
     scaffoldBackgroundColor: AppColor.secondary,
     dividerColor: const Color(0xFFBFBFBF),

@@ -14,6 +14,8 @@ ApiEndPoint {
   static const String removeWorkPlace = '/Boss/WorkplaceRemove';
   static const String modifyWorkPlace = '/Boss/WorkplaceSave';
   static const String getAllShifts = '/Boss/ShiftList';
+  static const String modifyShift = '/Boss/ShiftSave';
+  static const String deleteShift = '/Boss/ShiftRemove';
 
 
 }

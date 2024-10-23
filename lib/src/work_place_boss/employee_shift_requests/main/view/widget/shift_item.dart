@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../../../infrastructure/theme/app_color.dart';
 import '../../../../../../infrastructure/utils/utils.dart';
 
@@ -6,10 +7,11 @@ import '../../../../../share/widget/app_text.dart';
 import '../../../../../share/widget/delete_dialog.dart';
 import '../../../../../share/widget/row_builder.dart';
 
+import '../../controller/main_tab_boss_controller.dart';
 import '../../model/day_name.dart';
 import '../../model/shift_model.dart';
 
-class ShiftItem extends StatelessWidget {
+class ShiftItem extends GetView<MainTabBossController> {
   final void Function() onTap;
   final ShiftModel model;
 
@@ -62,20 +64,17 @@ class ShiftItem extends StatelessWidget {
                     const Spacer(),
                     PopupMenuButton<int>(
                       padding: EdgeInsets.zero,
-
                       onSelected: (final value) async {
                         if (value == 0) {
                           await showDialog(
                               context: context,
                               builder: (final c) => DeleteDialog(onDelete: () {
-
-                              }));
+                                    controller.deleteShift(
+                                        id: model.id.toString());
+                                  }));
                         }
 
-
-                        if (value == 1) {
-
-                        }
+                        if (value == 1) {}
                       },
                       itemBuilder: (final context) => [
                         const PopupMenuItem<int>(
@@ -111,7 +110,8 @@ class ShiftItem extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
                   child: Column(
                     children: [
                       Row(
@@ -151,18 +151,18 @@ class ShiftItem extends StatelessWidget {
                         title: 'روز تعطیل:',
                         valueWidget: DecoratedBox(
                           decoration: BoxDecoration(
-                            // color: AppColor.error.withOpacity(.1)
-                          ),
+                              // color: AppColor.error.withOpacity(.1)
+                              ),
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: AppText(
                               model.dayOff.getDayName(),
                               style: TextStyle(shadows: [
                                 Shadow(
-                                    color: AppColor.error,
+                                    color:model.dayOff==0 ? Colors.blue  :AppColor.error,
                                     blurRadius: 30,
                                     offset: Offset(0, 2)),
-                              ], color: AppColor.error),
+                              ], color:model.dayOff==0 ? Colors.blue : AppColor.error),
                             ),
                           ),
                         ),
@@ -174,17 +174,25 @@ class ShiftItem extends StatelessWidget {
                         value: model.toHour,
                         title: 'دارای تعطیلات رسمی:',
                         valueWidget: Icon(
-                          model.globalHoliday ? Icons.check_circle_rounded :  Icons.remove_circle_outlined,
+                          model.globalHoliday
+                              ? Icons.check_circle_rounded
+                              : Icons.remove_circle_outlined,
                           size: 18,
-                          color:model.globalHoliday ? AppColor.success : AppColor.error,
+                          color: model.globalHoliday
+                              ? AppColor.success
+                              : AppColor.error,
                         ),
                       ),
                       RowBuilder(
                         value: model.toHour,
                         title: 'الزام به حضور در محل کارگاه :',
                         valueWidget: Icon(
-                          model.justPlace ? Icons.check_circle_rounded :   Icons.remove_circle_outlined,
-                          color:model.justPlace ? AppColor.success : AppColor.error,
+                          model.justPlace
+                              ? Icons.check_circle_rounded
+                              : Icons.remove_circle_outlined,
+                          color: model.justPlace
+                              ? AppColor.success
+                              : AppColor.error,
                           size: 18,
                         ),
                       ),
@@ -192,15 +200,18 @@ class ShiftItem extends StatelessWidget {
                         value: model.toHour,
                         title: 'الزام به عکس سلفی:',
                         valueWidget: Icon(
-                          model.needPhoto ? Icons.check_circle_rounded :  Icons.remove_circle_outlined,
+                          model.needPhoto
+                              ? Icons.check_circle_rounded
+                              : Icons.remove_circle_outlined,
                           size: 18,
-                          color:model.needPhoto ? AppColor.success : AppColor.error,
+                          color: model.needPhoto
+                              ? AppColor.success
+                              : AppColor.error,
                         ),
                       ),
                     ],
                   ),
                 )
-
               ],
             ),
           ),

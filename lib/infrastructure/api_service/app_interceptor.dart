@@ -50,7 +50,19 @@ class AppInterceptor extends Interceptor {
         handler.next(err);
       }
 
-      if (err.response!.statusCode.toString() == '500') {}
+      if (err.response!.statusCode.toString() == '500') {
+        final response = Response(
+          requestOptions: RequestOptions(path: ''),
+          data: err.error,
+          statusCode: 400,
+        );
+
+        super.onError(
+          err.copyWith(response: response),
+          handler,
+        );
+
+      }
 
       if (err.response!.statusCode == _userNotValidStatusCode) {
         _logout();

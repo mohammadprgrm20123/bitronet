@@ -10,6 +10,7 @@ class AppRouteName {
   static String editWorkPlaceBoss = '/edit_wokplace_boss';
   static String selectAddress = '/selectAddress';
   static String mainTabBoss = '/main_tab_boss/:title/:id';
+  static String modifyShift = '/modifyShift';
 
 //------------------------------------------------------------------------------
   static String verifyRoute({required final String phone}) =>
@@ -27,6 +28,12 @@ class AppRouteName {
   static String mainTabBossRoute(
           {required final String title, required final String id}) =>
       '$homeRoute$workPlaceBoss$mainTabBoss'
+          .replaceAll(':title', title)
+          .replaceAll(':id', id);
+
+  static String modifyShiftRoute(
+          {required final String title, required final String id}) =>
+      '$homeRoute$workPlaceBoss$mainTabBoss$modifyShift'
           .replaceAll(':title', title)
           .replaceAll(':id', id);
 }

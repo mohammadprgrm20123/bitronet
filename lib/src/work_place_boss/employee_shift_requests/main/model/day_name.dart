@@ -14,11 +14,9 @@ extension DayName on int {
       case 5 : return 'چهار شنبه';
       case 6 : return 'پنج شنبه';
       case 7 : return 'جمعه';
-
-
     }
 
-    return '';
+    return 'ندارد';
 
   }
 

@@ -10,6 +10,7 @@ import '../../src/auth/verify/binding/verify_binding.dart';
 import '../../src/auth/verify/view/verify_screen.dart';
 import '../../src/home/view/home_screen.dart';
 import '../../src/work_place_boss/employee_shift_requests/main/view/main_tab_boss_screen.dart';
+import '../../src/work_place_boss/employee_shift_requests/modify_shift/view/modify_shift_screen.dart';
 import '../../src/work_place_boss/list/models/work_place_model.dart';
 import '../../src/work_place_boss/list/view/work_place_list_boss_screen.dart';
 import '../../src/work_place_boss/modify/view/modify_work_place_screen.dart';
@@ -57,6 +58,14 @@ class AppPages {
             GetPage(
               name: AppRouteName.mainTabBoss,
               page: () => MainTabBossScreen(workPlaceName: Get.parameters['title']??''),
+
+              children: [
+
+                GetPage(
+                  name: AppRouteName.modifyShift,
+                  page: () => ModifyShiftScreen(),
+                ),
+              ]
             ),
 
             GetPage(

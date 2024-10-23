@@ -201,8 +201,7 @@ class AppHttpClient {
               });
             }
           } else {
-            final newMap = dioError.response!.data['message'];
-            errorList.add(newMap);
+            errorList.add('خطای نامشخص ');
           }
         } else {
           errorList.add('خطا ناشناس');
